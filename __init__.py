@@ -15,4 +15,5 @@ from models import *
 
 
 if __name__ == '__main__':
+    print("init...")
     fl_app.run()
