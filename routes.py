@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect
-from __init__ import fl_app
+from __init__ import fl_app, db
 from forms import LoginForm, RegistrationForm
 from models import *
 
@@ -28,6 +28,7 @@ def login():
 def register():
     reg_form = RegistrationForm()
     if reg_form.validate():
+        flash('7777')
         user = User(reg_form.username.data, reg_form.email.data,
                     reg_form.password.data)
         db.add(user)
