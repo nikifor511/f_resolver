@@ -1,15 +1,54 @@
+<!--{% extends "base.html" %}-->
+<!--{% from "_formhelpers.html" import render_field %}-->
+
+<!--{% block content %}-->
+<!--  <form method=post>-->
+<!--    <dl>-->
+<!--      {{ render_field(form.username) }}-->
+<!--      {{ render_field(form.email) }}-->
+<!--      {{ render_field(form.password) }}-->
+<!--      {{ render_field(form.confirm) }}-->
+<!--      {{ render_field(form.accept_tos) }}-->
+<!--    </dl>-->
+<!--    <p><input type=submit value=Register>-->
+<!--  </form>-->
+<!--{% endblock %}-->
+
 {% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-  <form method=post>
-    <dl>
-      {{ render_field(form.username) }}
-      {{ render_field(form.email) }}
-      {{ render_field(form.password) }}
-      {{ render_field(form.confirm) }}
-      {{ render_field(form.accept_tos) }}
-    </dl>
-    <p><input type=submit value=Register>
-  </form>
+    <h1>Registration</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=35) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}
