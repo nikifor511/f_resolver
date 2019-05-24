@@ -2,7 +2,7 @@ from __init__ import db
 from datetime import datetime
 
 class User(db.Model):
-    __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     additional = db.Column(db.Text)
@@ -32,7 +32,6 @@ class Problem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     images = db.Column(db.Text)
     chat = db.Column(db.Text)
-
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
