@@ -24,7 +24,14 @@
            <span style="color: red;">[{{ error }}]</span>
            {% endfor %}
         </p>
-
-
+        <p>
+          {{ form.confirm.label }}<br>
+          {{ form.confirm(size=32) }}<br>
+          {% for error in form.confirm.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </p>
+        <p>{{ form.accept_tos() }} {{ form.accept_tos.label }}</p>
+        <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}

@@ -2,6 +2,7 @@ from __init__ import db
 from datetime import datetime
 
 class User(db.Model):
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     additional = db.Column(db.Text)
@@ -9,6 +10,14 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     type = db.Column(db.Integer)
     isLogin = db.Column(db.Boolean)
+
+    def __init__(self, username, additional, email, password_hash, type, isLogin):
+        self.username = username
+        self.additional = additional
+        self.email = email
+        self.password_hash = password_hash
+        self.type = type
+        self.isLogin = isLogin
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -27,3 +36,4 @@ class Problem(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
