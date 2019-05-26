@@ -10,11 +10,13 @@ fl_app.config.from_object(Config)
 db = SQLAlchemy(fl_app)
 migrate = Migrate(fl_app, db)
 
-from models import *
-from routes import *
+from models import User
+# usr = User('33', '', 'dddd', 'gggg', 1, False)
 
 db.create_all()
 db.session.commit()
+
+from routes import *
 
 if __name__ == '__main__':
     print("init...")

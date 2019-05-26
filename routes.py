@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect
 from __init__ import fl_app, db
 from forms import LoginForm, RegistrationForm
@@ -29,7 +28,7 @@ def register():
     reg_form = RegistrationForm()
     if reg_form.validate_on_submit():
         flash('7777')
-        user = User(reg_form.username.data, '', reg_form.email.data, reg_form.password.data, 1, False)
+        # user = User(reg_form.username.data, '', reg_form.email.data, reg_form.password.data, 1, False)
         #
         # db.session.add(user)
         # db.session.commit()
