@@ -2,7 +2,9 @@
 from flask import render_template, flash, redirect
 from __init__ import fl_app, db
 from forms import LoginForm, RegistrationForm
-from models import User
+# from models import User
+import psycopg2
+from psycopg2 import Error
 
 @fl_app.route('/')
 @fl_app.route('/index')
@@ -28,9 +30,27 @@ def login():
 def register():
     reg_form = RegistrationForm()
     if reg_form.validate_on_submit():
-        flash('7777')
-        user = User(reg_form.username.data, '', reg_form.email.data, reg_form.password.data, 1, False)
-        #
+        try:
+            connection = psycopg2.connect(user="postgres",
+                                          password="student511",
+                                          host="127.0.0.1",
+                                          port="5432",
+                                          database="resolver")
+            cursor = connection.cursor()
+            # cursor.callproc('registration_user', ['Kolyan', '1234567890', 1] )
+            cursor.execute("select register_user('Fdddordqw', '121212', 1)")
+            print(cursor.fetchall())
+            connection.commit()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error while connecting to PostgreSQL", error)
+        finally:
+            # closing database connection.
+            if (connection):
+                cursor.close()
+                connection.close()
+                print("PostgreSQL connection is closed")
+
+        # user = User(reg_form.username.data, '',  reg_form.password.data, 1, False)
         # db.session.add(user)
         # db.session.commit()
         flash('Thanks for registering')
