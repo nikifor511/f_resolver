@@ -30,9 +30,9 @@ def register():
     if reg_form.validate_on_submit():
         flash('7777')
         user = User(reg_form.username.data, '', reg_form.email.data, reg_form.password.data, 1, False)
-
-        db.session.add(user)
-        db.session.commit()
+        #
+        # db.session.add(user)
+        # db.session.commit()
         flash('Thanks for registering')
         return redirect('/index')
     return render_template('register.html', form=reg_form)
