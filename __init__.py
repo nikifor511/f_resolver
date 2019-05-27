@@ -10,7 +10,6 @@ fl_app.config.from_object(Config)
 db = SQLAlchemy(fl_app)
 migrate = Migrate(fl_app, db)
 
-from models import *
 from routes import *
 
 db.create_all()
