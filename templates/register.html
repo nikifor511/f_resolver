@@ -11,13 +11,6 @@
             {% endfor %}
         </p>
         <p>
-           {{ form.email.label }}<br>
-           {{ form.email(size=35) }}<br>
-           {% for error in form.email.errors %}
-           <span style="color: red;">[{{ error }}]</span>
-           {% endfor %}
-        </p>
-        <p>
            {{ form.password.label }}<br>
            {{ form.password(size=32) }}<br>
            {% for error in form.password.errors %}
@@ -28,6 +21,13 @@
           {{ form.confirm.label }}<br>
           {{ form.confirm(size=32) }}<br>
           {% for error in form.confirm.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </p>
+        <p>
+          {{ form.type_select.label }}<br>
+          {{ form.type_select(size=1) }}<br>
+          {% for error in form.type_select.errors %}
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
         </p>

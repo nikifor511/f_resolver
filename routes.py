@@ -37,22 +37,23 @@ def register():
                                           port="5432",
                                           database="resolver")
             cursor = connection.cursor()
-            # cursor.callproc('registration_user', ['Kolyan', '1234567890', 1] )
+            query_str = "select register_user('" + reg_form.username.data + "', '" + reg_form.password.data + "', " + reg_form.type_select.data + ")"
             cursor.execute("select register_user('Fdddordqw', '121212', 1)")
-            print(cursor.fetchall())
-            connection.commit()
+
+            rec = cursor.fetchall()
+            if rec[0][0] == 1:
+                flash('Username is busy')
+                print('Username is busy')
+            else:
+                flash('Thanks for registering')
+                return redirect('/index')
+            # connection.commit()
         except (Exception, psycopg2.DatabaseError) as error:
             print("Error while connecting to PostgreSQL", error)
         finally:
-            # closing database connection.
             if (connection):
                 cursor.close()
                 connection.close()
                 print("PostgreSQL connection is closed")
 
-        # user = User(reg_form.username.data, '',  reg_form.password.data, 1, False)
-        # db.session.add(user)
-        # db.session.commit()
-        flash('Thanks for registering')
-        return redirect('/index')
     return render_template('register.html', form=reg_form)
