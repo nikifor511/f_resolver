@@ -38,7 +38,8 @@ def register():
                                           database="resolver")
             cursor = connection.cursor()
             query_str = "select register_user('" + reg_form.username.data + "', '" + reg_form.password.data + "', " + reg_form.type_select.data + ")"
-            cursor.execute("select register_user('Fdddordqw', '121212', 1)")
+            print(query_str)
+            cursor.execute(query_str)    #"select register_user('Fdddordqw', '121212', 1)")
 
             rec = cursor.fetchall()
             if rec[0][0] == 1:
@@ -47,7 +48,7 @@ def register():
             else:
                 flash('Thanks for registering')
                 return redirect('/index')
-            # connection.commit()
+            connection.commit()
         except (Exception, psycopg2.DatabaseError) as error:
             print("Error while connecting to PostgreSQL", error)
         finally:
