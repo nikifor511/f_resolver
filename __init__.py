@@ -1,22 +1,16 @@
 from flask import Flask
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
+
+
 
 fl_app = Flask(__name__)
 
 fl_app.config['SECRET_KEY'] = 'you-will-never-guess'
 # fl_app.config.from_object(Config)
-fl_app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:student511@localhost/resolver'
-# fl_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(fl_app)
-db.create_all()
-# migrate = Migrate(fl_app, db)
+
 
 from routes import *
-#
-# db.create_all()
-# db.session.commit()
+
 
 if __name__ == '__main__':
     print("init...")
