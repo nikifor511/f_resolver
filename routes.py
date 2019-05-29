@@ -15,13 +15,16 @@ def index():
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        if login_form.remember_me.data == True:
-            # flash('Login requested for user {}, remember_me={}'.format(
-            # form.username.data, form.remember_me.data))
-            flash('true')
+        rec1 = DB.query("select login_user('" + login_form.username.data + "', '" + login_form.password.data + "')")
+        if rec1[0][0] == 2:
+            flash('No such user!')
+        elif rec1[0][0] == 1:
+            flash('Invalid password')
         else:
-            flash('false')
-        # return redirect('/index')
+            flash('Login ok!')
+            return redirect('/index')
+
+
     return render_template('login.html', title='Sign In', form=login_form)
 
 @fl_app.route('/register', methods=['GET', 'POST'])

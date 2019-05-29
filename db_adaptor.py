@@ -14,7 +14,7 @@ class DB():
             cursor = connection.cursor()
             print(query_str)
             cursor.execute(query_str)
-            rec = cursor.fetchall()
+            result = cursor.fetchall()
 
         except (Exception, psycopg2.DatabaseError) as error:
             print("Error while connecting to PostgreSQL", error)
@@ -23,4 +23,4 @@ class DB():
                 cursor.close()
                 connection.close()
                 print("PostgreSQL connection is closed")
-        return rec
+        return result
