@@ -15,13 +15,13 @@ def index():
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        rec1 = DB.query("select login_user('" + login_form.username.data + "', '" + login_form.password.data + "')")
-        if rec1[0][0] == 2:
+        rec = DB.query("select login_user('" + login_form.username.data + "', '" + login_form.password.data + "')")
+        if rec[0][0] == 2:
             flash('No such user!')
-        elif rec1[0][0] == 1:
+        elif rec[0][0] == 1:
             flash('Invalid password')
         else:
-            flash('Login ok!')
+            # flash('Login ok!')
             return redirect('/resolver')
 
 
@@ -38,3 +38,9 @@ def register():
             flash('Thanks for registering!')
             return redirect('/index')
     return render_template('register.html', form=reg_form)
+
+@fl_app.route('/resolver', methods=['GET', 'POST'])
+def resolver():
+    rec = DB.query()
+
+    return render_template('resolver.html')
