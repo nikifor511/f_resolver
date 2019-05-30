@@ -22,7 +22,7 @@ def login():
             flash('Invalid password')
         else:
             flash('Login ok!')
-            return redirect('/index')
+            return redirect('/resolver')
 
 
     return render_template('login.html', title='Sign In', form=login_form)
