@@ -1,8 +1,6 @@
 from flask import Flask
 from config import Config
 
-
-
 fl_app = Flask(__name__)
 
 fl_app.config['SECRET_KEY'] = 'you-will-never-guess'

@@ -3,6 +3,7 @@ from flask import render_template, flash, redirect
 from __init__ import fl_app
 from forms import LoginForm, RegistrationForm
 from db_adaptor import DB
+import globals
 
 @fl_app.route('/')
 @fl_app.route('/index')
@@ -22,6 +23,9 @@ def login():
             flash('Invalid password')
         else:
             # flash('Login ok!')
+            rec = DB.query("select id from users where \"Username\" = " + "'" + login_form.username.data +"'")
+            globals.user_id = rec[0][0]
+            print(globals.user_id)
             return redirect('/resolver')
 
 
@@ -41,6 +45,9 @@ def register():
 
 @fl_app.route('/resolver', methods=['GET', 'POST'])
 def resolver():
-    rec = DB.query()
-
-    return render_template('resolver.html')
+    recs = DB.query("select \"Title\" from problems where \"User_ID\" = " + str(globals.user_id))
+    recs1 = []
+    for rec in recs:
+        recs1.append(rec[0])
+    a =  1
+    return render_template('resolver.html', recs = recs1)

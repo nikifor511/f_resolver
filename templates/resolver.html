@@ -3,12 +3,11 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='ms.css') }}">
     </head>
     <body>
-        <div id="header"><h1>Плов народов мира</h1></div>
+        <div id="header"><h1>RESOLVER</h1></div>
         <div id="sidebar">
-            <p>Плов по-фергански</p><p>Плов узбекский</p>
-            <p>Плов сибирский</p><p>Плов итальянский</p>
-            <p>Плов эстонский</p><p>Плов по-американски</p>
-            <p>Плов по-индейски</p>
+            {% for rec in recs %}
+            <p>{{ rec }}</p>
+            {% endfor %}
         </div>
         <div id="content">
             <h2>Плов по-фергански</h2>
