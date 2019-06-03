@@ -49,5 +49,5 @@ def resolver():
     recs1 = []
     for rec in recs:
         recs1.append(rec[0])
-    a =  1
+
     return render_template('resolver.html', recs = recs1)
