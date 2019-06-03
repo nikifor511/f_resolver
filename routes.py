@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
 from __init__ import fl_app
 from forms import LoginForm, RegistrationForm
 from db_adaptor import DB
@@ -45,13 +45,19 @@ def register():
 
 @fl_app.route('/resolver_frameset', methods=['GET', 'POST'])
 def resolver_frameset():
-    # recs = DB.query("select \"Title\" from problems where \"User_ID\" = " + str(globals.user_id))
-    # recs1 = []
-    # for rec in recs:
-    #     recs1.append(rec[0])
+    return render_template('resolver_frameset.html', src_main='resolver_main', src_list = 'resolver_list')
 
-    return render_template('resolver_frameset.html', src='resolver.html')
+@fl_app.route('/resolver_main', methods=['GET', 'POST'])
+def resolver_main():
+    problem_id = request.args.get("problem_id")
 
-@fl_app.route('/resolver', methods=['GET', 'POST'])
-def resolver():
-    return render_template('resolver.html')
+    return render_template('resolver_main.html', problem_id = problem_id)
+
+@fl_app.route('/resolver_list', methods=['GET', 'POST'])
+def resolver_list():
+    problems = DB.query("select \"ID\", \"Title\" from problems where \"User_ID\" = " + str(globals.user_id))
+    problems_adapt = []
+    for problem in problems:
+        problems_adapt.append([problem[0], problem[1]])
+
+    return render_template('resolver_list.html', recs = problems_adapt)

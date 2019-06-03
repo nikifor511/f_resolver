@@ -1,0 +1,5 @@
+{% block content %}
+    {% for rec in recs %}
+    <p><a href="resolver_main?problem_id={{rec[0]}}" target = "main">{{ rec[1] }}</a></p>
+    {% endfor %}
+{% endblock %}
