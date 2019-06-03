@@ -26,7 +26,7 @@ def login():
             rec = DB.query("select id from users where \"Username\" = " + "'" + login_form.username.data +"'")
             globals.user_id = rec[0][0]
             print(globals.user_id)
-            return redirect('/resolver')
+            return redirect('/resolver_frameset')
 
 
     return render_template('login.html', title='Sign In', form=login_form)
@@ -43,11 +43,15 @@ def register():
             return redirect('/index')
     return render_template('register.html', form=reg_form)
 
+@fl_app.route('/resolver_frameset', methods=['GET', 'POST'])
+def resolver_frameset():
+    # recs = DB.query("select \"Title\" from problems where \"User_ID\" = " + str(globals.user_id))
+    # recs1 = []
+    # for rec in recs:
+    #     recs1.append(rec[0])
+
+    return render_template('resolver_frameset.html', src='resolver.html')
+
 @fl_app.route('/resolver', methods=['GET', 'POST'])
 def resolver():
-    recs = DB.query("select \"Title\" from problems where \"User_ID\" = " + str(globals.user_id))
-    recs1 = []
-    for rec in recs:
-        recs1.append(rec[0])
-
-    return render_template('resolver.html', recs = recs1)
+    return render_template('resolver.html')
