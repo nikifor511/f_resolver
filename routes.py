@@ -51,6 +51,7 @@ def resolver_frameset():
 def resolver_main():
     problem_id = request.args.get("problem_id")
 
+
     return render_template('resolver_main.html', problem_id = problem_id)
 
 @fl_app.route('/resolver_list', methods=['GET', 'POST'])
