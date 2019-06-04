@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, request, url_for
 from __init__ import fl_app
 from forms import LoginForm, RegistrationForm
 from db_adaptor import DB
 import globals
+import os
 
 @fl_app.route('/')
 @fl_app.route('/index')
@@ -50,9 +51,28 @@ def resolver_frameset():
 @fl_app.route('/resolver_main', methods=['GET', 'POST'])
 def resolver_main():
     problem_id = request.args.get("problem_id")
+    messages = []
+    if problem_id == None:
+        messages.append(["","","","Choose the problem","---","center"])
+    else:
+        path = os.path.abspath(os.path.dirname(__file__))
+        path = path + '\static\chats'
+        chat_file = open(path + '/pr' + str(problem_id), 'r')
+        url_for('static', filename = 'chats/')
+        for line in chat_file:
+            if line[-1] == '\n':
+                line = line[:-1]
+            message_params = line.split("|")
+            if message_params[2] == str(globals.user_id):
+                message_params.append("right")
+            else:
+                message_params.append("left")
 
+            if message_params[4] != "---":
+                message_params[4] = url_for('static', filename = 'chats/media' + str(problem_id) + "/" + message_params[4])
+            messages.append(message_params)
 
-    return render_template('resolver_main.html', problem_id = problem_id)
+    return render_template('resolver_main.html', messages = messages)
 
 @fl_app.route('/resolver_list', methods=['GET', 'POST'])
 def resolver_list():

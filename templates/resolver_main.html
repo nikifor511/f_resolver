@@ -1,13 +1,31 @@
 {% block content %}
     <head>
-      <link rel="stylesheet" href="{{ url_for('static', filename='ms.css') }}">
+	<title>Страница</title>
+	<link rel="stylesheet" href="../12/css/template.css" type="text/css" />
+	<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+	<script type="text/javascript" src="js/popup_img.js"></script>
     </head>
-    <body>
-
-        <div id="content">
-            <h2>{{problem_id}}</h2>
-            <p>----------------</p>
-        </div>
     </body>
-
+    {% for message in messages %}
+        <p align="{{message[5]}}">{{message[0]}}_{{message[1]}}  {{message[2]}}:<b>{{message[3]}}</b></p>
+        {% if message[4] != "---" %}
+            <p align="{{message[5]}}"><img src='{{message[4]}}' alt="Письма мастера дзен"></p>
+        {% endif %}
+    {% endfor %}
+    </body>
 {% endblock %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<title>Страница</title>
+	<link rel="stylesheet" href="../12/css/template.css" type="text/css" />
+	<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+	<script type="text/javascript" src="js/popup_img.js"></script>
+</head>
+<body>
+	<img src="images/image1.jpg" class="image" alt="Пейзаж" />
+	<img src="images/image2.jpg" class="image" alt="Пейзаж" />
+	<img src="images/image3.jpg" class="image" alt="Пейзаж" />
+</body>
+</html>
