@@ -19,3 +19,7 @@ class RegistrationForm(FlaskForm):
       ('2', 'Programmer'), ('3', 'Administrator')])
     accept_tos = BooleanField('I accept the TOS', validators=[DataRequired()])
     submit = SubmitField('Register')
+
+class SendForm(FlaskForm):
+    message = StringField('message')
+    submit = SubmitField('Send')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, request, url_for
 from __init__ import fl_app
-from forms import LoginForm, RegistrationForm
+from forms import LoginForm, RegistrationForm, SendForm
 from db_adaptor import DB
 import globals
 import os
@@ -46,6 +46,7 @@ def register():
 
 @fl_app.route('/resolver_frameset', methods=['GET', 'POST'])
 def resolver_frameset():
+
     return render_template('resolver_frameset.html', src_main='resolver_main', src_list = 'resolver_list')
 
 @fl_app.route('/resolver_main', methods=['GET', 'POST'])

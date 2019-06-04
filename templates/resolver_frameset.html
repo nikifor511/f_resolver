@@ -1,12 +1,12 @@
 {% block content %}
     <html>
-        <frameset rows="20%,80%">
+        <frameset rows="8%,84%,8%">
             <frame src=''>
-                <frameset cols='20%,80%'>
-                    <frame src='{{src_list}}'>
-                    <frame src='{{src_main}}' name = "main">
-                </frameset>
-                <frame src=''>
+            <frameset cols='20%,80%'>
+                <frame src='{{src_list}}'>
+                <frame src='{{src_main}}' name = "main">
+            </frameset>
+            <frame src=''>
         </frameset>
     </html>
 {% endblock %}
