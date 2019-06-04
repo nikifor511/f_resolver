@@ -5,6 +5,7 @@ from forms import LoginForm, RegistrationForm, SendForm
 from db_adaptor import DB
 import globals
 import os
+import datetime
 
 @fl_app.route('/')
 @fl_app.route('/index')
@@ -53,13 +54,19 @@ def resolver_frameset():
 def resolver_main():
     problem_id = request.args.get("problem_id")
     messages = []
+    path = os.path.abspath(os.path.dirname(__file__))
+    path = path + '/static/chats'
+    send_form = SendForm()
+    if send_form.submit():
+        chat_file = open(path + '/pr' + str(problem_id), 'a')
+        chat_file.write('dddddddd')
+
     if problem_id == None:
         messages.append(["","","","Choose the problem","---","center"])
     else:
-        path = os.path.abspath(os.path.dirname(__file__))
-        path = path + '\static\chats'
+
         chat_file = open(path + '/pr' + str(problem_id), 'r')
-        url_for('static', filename = 'chats/')
+        # url_for('static', filename = 'chats/')
         for line in chat_file:
             if line[-1] == '\n':
                 line = line[:-1]
@@ -72,8 +79,10 @@ def resolver_main():
             if message_params[4] != "---":
                 message_params[4] = url_for('static', filename = 'chats/media' + str(problem_id) + "/" + message_params[4])
             messages.append(message_params)
+        chat_file.close()
 
-    return render_template('resolver_main.html', messages = messages)
+
+    return render_template('resolver_main.html', messages = messages, form = send_form)
 
 @fl_app.route('/resolver_list', methods=['GET', 'POST'])
 def resolver_list():
@@ -83,3 +92,5 @@ def resolver_list():
         problems_adapt.append([problem[0], problem[1]])
 
     return render_template('resolver_list.html', recs = problems_adapt)
+
+

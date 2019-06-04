@@ -5,12 +5,23 @@
 	<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'popup_img.js')}}"></script>
     </head>
-    </body>
+    <body>
     {% for message in messages %}
         <p align="{{message[5]}}">{{message[0]}}_{{message[1]}}  {{message[2]}}:<b>{{message[3]}}</b></p>
         {% if message[4] != "---" %}
             <p align="{{message[5]}}"><img src="{{message[4]}}" class="image" alt="{{message[4]}}"></p>
         {% endif %}
     {% endfor %}
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.message.label }}<br>
+                {{ form.message(size=32) }}<br>
+                {% for error in form.message.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
     </body>
 {% endblock %}
