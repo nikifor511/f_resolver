@@ -21,5 +21,5 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
 class SendForm(FlaskForm):
-    message = StringField('message')
+    message = StringField('message', validators=[DataRequired()])
     submit = SubmitField('Send')

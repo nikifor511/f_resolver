@@ -57,14 +57,18 @@ def resolver_main():
     path = os.path.abspath(os.path.dirname(__file__))
     path = path + '/static/chats'
     send_form = SendForm()
-    if send_form.submit():
+    if send_form.validate_on_submit():
+        now = datetime.datetime.now()
         chat_file = open(path + '/pr' + str(problem_id), 'a')
-        chat_file.write('dddddddd')
+        chat_str = '\n' + str(now.date()) + '|' + str(now.strftime("%H:%M:%S")) + '|' + str(globals.user_id) + '|' + send_form.message.data + '|' + '---'
+        print(chat_str)
+        chat_file.write(chat_str)
+        print('----button pressed')
+        send_form.message.data = ''
 
     if problem_id == None:
         messages.append(["","","","Choose the problem","---","center"])
     else:
-
         chat_file = open(path + '/pr' + str(problem_id), 'r')
         # url_for('static', filename = 'chats/')
         for line in chat_file:
